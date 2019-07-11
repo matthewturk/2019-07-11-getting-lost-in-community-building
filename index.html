@@ -221,7 +221,11 @@ And, that&#39;s [[inappropriate-&gt;distinction considered harmful]].</tw-passag
 
 (if: (passage:)&#39;s name is &quot;Technical Infrastructure&quot;)[(if: (history:) contains &quot;Social Infrastructure&quot;)[(show: ?design)](else:)[(show: ?social)]](if: (passage:)&#39;s name is &quot;Social Infrastructure&quot;)[(if: (history:) contains &quot;Technical Infrastructure&quot;)[(show: ?design)](else:)[(show: ?tech)]]</tw-passagedata><tw-passagedata pid="27" name="Start the Game" tags="" position="817,1022.5" size="100,100">Alright, let&#39;s play a game of pretend!
 
-Let&#39;s say you&#39;re starting out a [[new project-&gt;Name your Project]].</tw-passagedata><tw-passagedata pid="28" name="first steps" tags="" position="402,41.5" size="100,100">Wait a second, it looks like there&#39;s another project named |backname&gt;[(str-reversed: $project_name)].
+Let&#39;s say you&#39;re starting out a [[new project-&gt;Name your Project]].</tw-passagedata><tw-passagedata pid="28" name="first steps" tags="" position="402,41.5" size="100,100">(if: $project_name is 0)[(set: $project_name to &quot;pysigh&quot;)OK, I&#39;ll just go with &quot;$project_name&quot; for your project.
+
+](if: $project_purpose is 0)[(set: $project_purpose to &quot;responds to puns from Anthony and Paul&quot;)Nothing is really purposeless, so I&#39;ll just go with &quot;it $project_purpose.&quot;
+
+]Wait a second, it looks like there&#39;s another project named |backname&gt;[(str-reversed: $project_name)].
 
 (click:?backname)[Oh sheesh, and not only that, but it also |purpose&gt;[$project_purpose].]
 
