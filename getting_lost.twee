@@ -1,0 +1,454 @@
+:: StorySettings
+ifid:4b124aa5-e1ce-4360-bcf1-5919c28fb754
+zoom:1
+
+
+:: StoryTitle
+Let's Get Lost Together
+
+
+:: Story Stylesheet [stylesheet]
+/*
+    Reposition the Sidebar 'footer' tagged passage.
+*/
+tw-sidebar tw-icon.redo {
+	display: none;
+}
+tw-sidebar tw-icon.undo {
+	display: none;
+}
+
+tw-sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 20%;                        /* padding-right of the tw-story element. */
+    max-height: 100%;
+    margin-top: 5%;                    /* padding-top of the tw-story element. */
+    padding: 0.5em 0.5em 0.5em 0.5em;
+    text-align: left;
+    background-color: transparent;
+  font-size: 75%;
+}
+tw-icon {
+    text-align: right;
+    padding-right: 0.75em;
+}
+
+progress {
+  background-color: #f3f3f3;
+  border: 0;
+  height: 18px;
+  border-radius: 9px;
+}
+
+progress::-webkit-progress-bar {
+  background-color: #f3f3f3;
+}
+progress.burnout::-webkit-progress-value {
+  background-color: #FFAA33;
+}
+
+progress.success::-webkit-progress-value {
+  background-color: #33AAFF; 
+}
+
+
+:: Story JavaScript [script]
+// https://exgeekfacto.blogspot.com/2018/02/InputStyles.html
+window.Harlowe = { 'State' : State };
+window.processInputElements = function () {
+    $('input[data-varname]').on('change', function () {
+        var varName = $(this).attr('data-varname');
+        Harlowe.State.variables[varName] = this.value;
+    });
+};
+
+
+:: Hi I'm Matt
+Hi, I'm Matt.
+
+(click:"Matt")[I'm going to try something [new]<second| this time.]
+
+(click:?second)[I'm not totally sure it's going to |work>[work].]
+
+(click:?work)[But, now that I mostly hang out with librarians, storytellers, information scientists and interactive fiction scholars, I couldn't pass up the [[opportunity->Who Am I]].]
+
+
+:: header [header]
+(enchant: ?page, (text-colour: black) + (background: white))(enchant: "burnout", (text-colour: red) + (text-style: 'bold'))(if: $burnout_level is 100)[(goto: "You have burned out.")](if: $started_game is not 0)[
+(if: $project_name is not 0)[Project: $project_name]
+(print: 'Points: <progress value="' + (text: $community_points) + '" max="100" class="success"></progress>') (print: 'Burnout: <progress value="' + (text: $burnout_level) + '" max="100" class="burnout"></progress>')
+{
+	(set: $total_days to (history:)'s length + $extra_days)
+	(set: $years to (floor: $total_days / 365))
+	(set: $days to $total_days % 365)
+	(set: $weeks to (floor: $days / 7))
+	(set: $days to $days % 7)
+}
+You've been at this for(if: $years is not 0)[ $years years,] $weeks weeks and $days days.
+---
+]
+
+
+:: Name your Project
+What do you want to name your project?
+<input type="text" data-varname="project_name">\
+<script>processInputElements();</script>
+
+And, it ...
+<input type="text" data-varname="project_purpose">\
+<script>processInputElements();</script>
+
+[[And we're off!->first steps]]
+
+
+:: End pt2
+But here's |thething>[the thing] about what we've been up to here.
+
+(click:?thething)[We've been measuring stuff in a pretty |simplistic>[simplistic] way.]
+
+(click:?simplistic)[And not only simplistic, but pretty [[self-serving->End pt3]] way, too.]
+
+
+:: End pt3
+This story was all written in the second-person.
+
+Did you interpret it as the second-person |plural>[plural]?
+
+(click:?plural)[Or did you interpret it as the second-person |singular>[singular]?]
+
+(click:?singular)[The thing I lost sight of in that paper is that we're *all* the protagonists in |story>[our own stories].]
+
+(click:?story)[And the thing is, while you're [[out making your project->End pt4]], everybody else is also making the same decisions and optimizations.]
+
+
+:: Who Am I
+So a couple of years ago, I |wrote>[wrote a paper] called "<a href="https://arxiv.org/abs/1301.7064">How to Scale a Code in the Human Dimension</a>."
+
+Andy suggested I give a talk about that |paper>[paper].
+
+(click:?paper)[Which is fun, because I think he invited me to give the talk that inspired the paper in the first place.  Also, I don't get to see Andy as often as I'd like anymore.
+
+And, it's been a couple years, and times have changed a bit.  So it seems like a good opportunity to update [[the paper->behumblement]].]
+
+
+:: Projects: Enzo
+The first one was a project called <a href="http://enzo-project.org/" target=_blank>Enzo</a>.
+
+Enzo was a project I didn't create, but which I really, really loved.  It was a simulation code, and it was written in C++, and you could make it simulate |simulate>[gas dynamics].
+
+(click:?simulate)[
+Enzo was a fun case. It was a "primary" code.  People used it to do their "science."
+
+(display: "visit check")
+
+(enchant:?Page, (background:"https://enzo-project.org/images/curl2.jpg") + (text-color:white))
+(enchant:?Passage, (background:(rgba: 0,0,0, 0.4)))]
+
+
+:: Projects: yt
+<a href="http://yt-project.org" target=_blank>yt</a> was the other project I talked about, and I was pretty sure it was pretty awesome.  Not only that, but I was pretty sure that what I was doing with yt was pretty awesome.
+
+yt is the project that brought me to SciPy for the first time back when it was called [[SciPy 2008]].
+
+(display: "visit check")
+
+
+:: The Paper
+In the paper, I give a breakdown of some things about what I thought I knew about community building.  It had a couple really clear recommendations, based on some |experiences>[experiences] I had with two sorta different projects.
+
+Nowadays, the recommendations seem a bit pedestrian. And frankly, I'm pretty sick of giving recommendations that focus on self-interest as a guiding principle instead of moral good^^|f1>[1]^^.
+
+(click:?experiences)[Let's talk about those projects.  The first one was called [[Enzo->Projects: Enzo]] and the second was called [[yt->Projects: yt]].]
+
+(click:?f1)[1. This is a hard thing to internalize.]
+
+
+:: SciPy 2008
+Those of you who were at Ralf's talk yesterday might recall him talking about the age of NumPy.
+
+At SciPy 2008, I remember sitting in the audience and seeing a presentation by Travis Oliphant about the internal structure of dtypes and ufuncs and thinking, my goodness, this is where I want to be.
+
+Anyway, |goback>[where were we]?
+
+(click:?goback)[(go-to:  (history:)'s last)]
+
+
+:: Recommendations
+So in that paper I made two big recommendations, both based on one *particular* recommendation:
+<blockquote><i>You must design the community you want.</i></blockquote>
+
+I still sort of believe this, but [[differently->Designing Community]].  In the paper, I suggested:
+
+1. Build [[technical infrastructure->Technical Infrastructure]] to support communities.
+2. Build [[social infrastructure->Social Infrastructure]] to support communities.
+
+
+:: Observations: Part 1
+You have to remember: early 2013 (and 2012) was^^|f1>[1]^^ a different time.  Slack didn't come on the scene until the original^^|f2>[2]^^ Glitch died, GitHub was *obviously* on its way to success but had not *utterly* obliterated the competition, and I, at least, still thought that when the credits rolled the happy ending would <a href="https://www.avclub.com/this-is-not-going-to-go-the-way-you-think-the-last-jed-1821472840">last for a while.</a>
+
+Some of these [[observations->Observations: Part 2]] have held up.  Others, maybe not.
+
+(click:?f1)[1. Or at least, that's what I am telling myself.]
+(click:?f2)[2. I almost wrote "not the cool one" but then I realized, they're both cool.  Almost as cool as Game Neverending.]
+
+
+:: visit check
+|obsrec)[In that paper, I made a couple of [[observations->Observations: Part 1]] and [[recommendations->Recommendations]].]
+|enzo)[ [[Enzo->Projects: Enzo]] is the other code.]
+|yt)[ [[yt->Projects: yt]] is the other code.]
+
+(if: (passage:)'s name is "Projects: Enzo")[(if: (history:) contains "Projects: yt")[(show: ?obsrec)](else:)[(show: ?yt)]](if: (passage:)'s name is "Projects: yt")[(if: (history:) contains "Projects: Enzo")[(show: ?obsrec)](else:)[(show: ?enzo)]]
+
+
+:: distinction considered harmful
+The big one that people seem to take away (probably because it was in bold) was a |strong>[pretty strong one]:
+
+(click:?strong)[<blockquote><i> Often, the self-application of a term like "user," with its connotations, results from self-assigned roles, or perceptions of individual abilities. As peers in a global scientific community, the distinction between "users" and "developers" |reallytrue>[is] actively harmful, when in reality scientists are tasked with occupying that grey area in the middle.</i></blockquote>]
+
+(click:?reallytrue)[But ... *is* that really [[true->distinction]]?]
+
+
+:: distinction
+This was something I didn't really grasp, and something I wish I could go back and explain to myself.
+
+Not everyone needs to engage at the |t1>[same level].  And, like Tania Allrad said yesterday, engagement is a function of privilege.
+
+(click:?t1)[Not everyone wants what I |t2>[want].]
+
+(click:?t2)[And most importantly, my experience is not necessarily |t3>[replicable].]
+
+(click:?t3)[I thought it was all just a game I could (cycling-link: "optimize", "[[optimize and win->Start the Game]]").]
+
+
+:: Observations: Part 2
+The implicit presumption of the paper was one that, maybe, feels a bit strange in this particular venue.  It was simple:
+
+"Communities^^|f1>[1]^^ are good."
+
+(cycling-link: "They can fix things!",
+				   "They'll make your workload lighter!",
+				   "They'll open up new opportunities for research!",
+				   "They'll take out your garbage!",
+				   "They'll put together furniture kits!",
+				   "And they can even make sure you never have spinach on your front teeth when you're on a Zoom call you might not know about^^|f2>[2]^^.")
+
+And how did they do [[this->Observations: Part 3]]?
+
+(click:?f1)[1. Especially communities of practice.]
+(click:?f2)[2. Too soon?]
+
+
+:: Observations: Part 3
+The idea I was trying to get across -- mostly to people who were resistant for other reasons to engage outside their research group -- was to align your interests with the interests of the other community members.
+
+So, based on this, I made a few [[recommendations->Recommendations]].
+
+
+:: Designing Community
+I make a big deal of "designing" community, which kind of |gross>[feels gross] to me nowadays.
+
+(click:?gross)[It's not so much that intentionality is bad.  It's not. It's that I realize that "design" is something that cannot, or at least should not, be [[imposed->Imposing Design]].]
+
+
+:: Technical Infrastructure
+Technology changes^^|f1>[1]^^ and the recommendations there -- use IRC! use mailing lists!
+
+But the medium does impact the message. And so we *do* have to be careful, even if the specifics change.
+
+(display: "visit check: infra")
+
+(click:?f1)[1. There was a piece of tech mentioned in that paper that I no longer use that I still weep for.]
+
+
+:: Social Infrastructure
+In the paper, I recommend behaving with [[Humility]], [[Respect]] and [[Trust]].
+
+These are easy to lose sight of, especially as |ending>[time goes on], and things become more complicated.
+
+(display: "visit check: infra")
+
+(click:?ending)[Stories don't just "end."  They keep going and people change and relationships change.  We have to be mindful of our relationships as this happens.]
+
+
+:: Humility
+How do you respond to negative feedback?
+
+(cycling-link: "Do you get really resentful?",
+			   "Do you snap back?",
+			   "Do you tell people that they're just not *understanding*?!",
+			   "[[Or do you respond with empathy and care?->Social Infrastructure]]")
+
+
+:: Respect
+What is the tone set in your community?
+
+(cycling-link: 	"Is it one where you think nobody's as good at this as you are?",
+				"Is it one where you view everything as a *transaction*?",
+				"Is it one where you just want to hustle for the next milestone?",
+				"Is it one where you just want to hustle for the next sale?",
+				"Is it one where you just want to hustle for the next grant?",
+				"[[Or is it one where you assume the best of people?->Social Infrastructure]]")
+
+
+:: Trust
+How do you feel about the community in your project?
+
+(cycling-link: "Do they need you to help them at every step?",
+			   "Will they get lost without you?",
+			   "Are you the only one that can save them?",
+			   "Are you their Jedi Knight?",
+			   "[[Or is it time for the Jedi to end?->Social Infrastructure]]")
+
+
+:: Title
+<h2>Getting Lost in Community Building</h2>
+<h4>[[Matthew Turk->Hi I'm Matt]]<br/>School of Information Sciences<br/>University of Illinois<br/><br/><tt>mjturk@illinois.edu / @powersoffour / gh:matthewturk</tt></h4>
+
+([[Shall we?->Hi I'm Matt]])
+
+
+:: Imposing Design
+*Imposing* a community means making decisions for other people.
+
+It means asking people to assimilate.
+
+And, that's [[inappropriate->distinction considered harmful]].
+
+
+:: visit check: infra
+|design)[I kind of also talked a bit about [[designing a community->Designing Community]].]
+|tech)[I also made some recommendations for [[technical->Technical Infrastructure]] infrastructure.]
+|social)[I also made some recommendations for [[social->Social Infrastructure]] infrastructure.]
+
+(if: (passage:)'s name is "Technical Infrastructure")[(if: (history:) contains "Social Infrastructure")[(show: ?design)](else:)[(show: ?social)]](if: (passage:)'s name is "Social Infrastructure")[(if: (history:) contains "Technical Infrastructure")[(show: ?design)](else:)[(show: ?tech)]]
+
+
+:: Start the Game
+Alright, let's play a game of pretend!
+
+Let's say you're starting out a [[new project->Name your Project]].
+
+
+:: first steps
+(if: $project_name is 0)[(set: $project_name to "pysigh")OK, I'll just go with "$project_name" for your project.
+
+](if: $project_purpose is 0)[(set: $project_purpose to "responds to puns from Anthony and Paul")Nothing is really purposeless, so I'll just go with "it $project_purpose."
+
+]Wait a second, it looks like there's another project named |backname>[(str-reversed: $project_name)].
+
+(click:?backname)[Oh sheesh, and not only that, but it also |purpose>[$project_purpose].]
+
+(click:?purpose)[What do you think, should we [[just work on that one->Work on that one]] or should we [[make our own thing instead->Good choice]]?]
+
+
+:: Work on that one
+Haha, nice try.
+
+[[Make your own thing]].
+(set: $started_game to 1)
+(set: $extra_days to (history:)'s length)
+
+
+:: Make your own thing
+(set: $started_game to 1)OK!  So let's figure out what we need to do.
+
+|game_registered>[Should we register an organization on |github>[github] or |gitlab>[gitlab] or self-host a |gitweb>[gitweb]?] |game_chat>[Should we set up |gitter>[gitter] or |slack>[slack] or maybe an |IRC>[IRC channel]?][Shall we get to [[work->Work on Software]]?]
+{(click:?gitter)[(set: $game_chat to 1)(set: $community_points to it + 5)(set: $burnout_level to it + 5)(replace:?game_chat)[]](click:?slack)[(set: $game_chat to 1)(set: $community_points to it + 10)(set: $burnout_level to it + 10)(replace:?game_chat)[]](click:?IRC)[(set: $game_chat to 1)(set: $community_points to it + 1)(set: $burnout_level to it + 4)(replace:?game_chat)[]](click:?github)[(set: $community_points to it + 5)(set: $burnout_level to it + 5)(replace:?game_registered)[]](click:?gitlab)[(set: $community_points to it + 5)(set: $burnout_level to it + 10)(replace:?game_registered)[]](click:?gitweb)[(set: $community_points to it + 1)(set: $burnout_level to it + 15)(replace:?game_registered)[]]}
+
+
+:: End pt1
+(set: $started_game to 0)You reached $community_points "community points."  Congrats?
+
+(if: $community_points is 100)[You have won "Community"! Please collect your [[prize]].](else:)[(if: $community_points > 90)[You are so close!  Keep trying!](else-if: $community_points > 50)[You have earned a spot on the Hall of Fame! Be sure to send that to your loved ones and tweet out flattering photos of yourself in front of it.
+
+But there's [[still more work to do->End pt2]]!](else-if: $community_points > 40)[Things are starting to look up.  You have exceeded 1.0 in your <tt>stars/forks</tt> ratio on GitHub, and occasionally you get retweeted by Scientific Python Celebrities!](else-if: $community_points > 10)[There are exactly two other people using your project, and each has contributed at least one patch.](else:)[You forgot why you were doing this in the first place.]  [[Let's move on.->End pt2]]]
+
+
+:: prize
+(set: $started_game to 0)There is no (cycling-link: "prize", "[[except the one you make for yourself->End pt2]]").
+
+
+:: Good choice
+Good choice.  I'm sure there's room in the ecosystem for another package that $project_purpose.  Let's [[get to work->Make your own thing]].
+
+(set: $started_game to 1)
+(set: $extra_days to (history:)'s length)
+
+
+:: Work on Software
+There's lots of functionality to implement!
+
+Should we [[write some new code?->Write code]]  Or maybe [[tell people about $project_name?->Talk to people]]  Although, you could also [[fix some bugs.->Fix bugs]]
+
+Or, should you just go ahead and [[use the project->Use the project]]?
+
+Maybe it's time to [[call it a day->End pt1]].
+
+
+:: Write code
+(set: $code_difficulty to (random: 1,3))(set: $code_success to (random: 1,10))Wow, that was (if: $code_difficulty is 3)[really, really hard](else-if: $code_difficulty is 2)[taxing](else:)[pretty straightforward] and it seemed to be (if: $code_success is 10)[fantastically productive](else-if: $code_success > 7)[pretty useful](else-if: $code_success > 3)[kind of worthwhile](else:)[totally useless.  Ugh].(set: $burnout_level to it + $code_difficulty * 2)(set: $community_points to it + $code_success)(set: $extra_days to it + $code_difficulty)
+
+[[So what's next?->Work on Software]]
+
+
+:: Talk to people
+(set: $talk_type to (random: 1,3))(set: $talk_skill to (random: 1,10))WOW!  You just gave (if: $talk_skill > 8)[an awesome](else-if: $talk_skill > 4)[an oh-kay](else-if: $talk_skill > 2)[a sorta crummy](else:)[a terrible, terrible] (if: $talk_type is 1)[poster](else-if: $talk_type is 2)[lightning talk](else-if: $talk_type is 3)[full-scale talk].
+
+My goodness, that really takes it out of you!(set: $burnout_level to it + $talk_type * 2)(set: $community_points to it + ($talk_type * 2 + $talk_skill))(set: $extra_days to it + $talk_skill * 2)
+
+[[So what's next?->Work on Software]]
+
+
+:: Use the project
+You've managed to get a few more things done.  I mean, that was kind of okay, right?(set: $burnout_level to it - (random: 5, 15))(set: $extra_days to it + (random: 5, 20))
+
+[[So what's next?->Work on Software]]
+
+
+:: Fix bugs
+(set: $bug_count to (random: 1,10))(set: $bug_difficulty to (random: 1, 10))Fixing bugs is really hard.  You manage to solve $bug_count of them, and it (if: $bug_difficulty < 3)[wasn't so bad.](else-if: $bug_difficulty < 6)[was challenging but worthwhile.](else-if: $bug_difficulty < 9)[strained you a bit.](else:)[really, really took it out of you.](set: $burnout_level to it + $bug_difficulty)(set: $community_points to it + $bug_count)(set: $extra_days to it + $bug_difficulty)
+
+[[So what's next?->Work on Software]]
+
+
+:: End pt4
+(With your permission, I will switch back to first person.)
+
+That's the end of my talk, and I guess I don't have a lot of takeaways.  I got pretty into the idea of [[making it a game->End pt5]].
+
+
+:: End pt5
+But in making the game, I realized a |fewthings>[few things].
+
+(click:?fewthings)[I have made so, so many mistakes.  |somany>[Just so many.]
+
+And all the stuff I thought I knew, or that I thought I could do, I [[struggled to implement->End pt6]].]
+(click:?somany)[(replace: ?somany)["<i>'And bad mistakes, I've made a few...'</i>"]]
+
+
+:: End pt6
+So here's my takeaway: you (singular) are the protagonist in *your* story.  But you (plural) are the protagonists of *your community's* story.
+
+So treat people with kindness.  And humility.  And respect.
+
+And listen to people who know what they're [[talking about->End pt7]].
+
+
+:: behumblement
+So |let>[let's](click:?let)[<h2>begin the behumblement!!!</h2>
+
+([[over here->The Paper]])]
+
+
+:: End pt7
+I'd like to say thank you to the conference organizers, and all of the other presenters, who have said things that have resonated and impacted me.  I'm really |grateful>[grateful] to be given this opportunity to talk to you all.
+
+(click:?grateful)[And I'd especially like to thank the reviewer who pointed out all the issues with my abstract and gave me a nice behumblement that really fed into the structure of this [[talk->Real End]].  (And, thanks to the un-blinded process, I *actually do* know who to thank!)]
+
+
+:: Real End
+<h1>Thank you!</h1>
+
+
